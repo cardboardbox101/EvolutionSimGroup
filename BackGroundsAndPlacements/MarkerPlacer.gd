@@ -1,10 +1,10 @@
 extends Node
 
-onready var background = preload("res://Markers.tscn")
+onready var background = preload("res://BackGroundsAndPlacements/Markers.tscn")
 onready var lastSpace = 0
 func _ready():
 	var blankStr = 0
-	for n in 4:
+	for n in 100:
 		var s = background.instance()
 		add_child(s)
 		var vec2 = Vector2(lastSpace,398.5)
