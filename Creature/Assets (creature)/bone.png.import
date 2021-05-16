@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bone.png-61467afe46ab579498fa3841a4e8a2dc.stex"
+path="res://.import/bone.png-15503ef74c61235ae4b6c2521136b3e7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/bone.png"
-dest_files=[ "res://.import/bone.png-61467afe46ab579498fa3841a4e8a2dc.stex" ]
+source_file="res://Creature/Assets (creature)/bone.png"
+dest_files=[ "res://.import/bone.png-15503ef74c61235ae4b6c2521136b3e7.stex" ]
 
 [params]
 

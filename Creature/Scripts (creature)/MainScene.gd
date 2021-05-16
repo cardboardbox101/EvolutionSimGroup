@@ -1,6 +1,6 @@
 extends Node2D
 
-const CREATURE = preload("res://Scenes/Creature.tscn")
+const CREATURE = preload("res://Creature/Scenes (creature)/MainScene.tscn")
 var rng = RandomNumberGenerator.new()
 onready var timer = $Timer
 var creature
