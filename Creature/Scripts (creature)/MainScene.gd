@@ -1,12 +1,13 @@
 extends Node2D
 
-const CREATURE = preload("res://Creature/Scenes (creature)/MainScene.tscn")
+const CREATURE = preload("res://Creature/Scenes (creature)/Creature.tscn")
 var rng = RandomNumberGenerator.new()
 onready var timer = $Timer
 var creature
 var a = false
 
 func _ready():
+	print("READY")
 	timer.wait_time = 3
 	timer.start()
 

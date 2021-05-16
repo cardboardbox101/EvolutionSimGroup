@@ -1,5 +1,5 @@
 extends Node2D
-var simultaneous_scene = preload("res://BackGround.tscn").instance()
+var simultaneous_scene = preload("res://BackGroundsAndPlacements/BackGround.tscn").instance()
 
 # Declare member variables here. Examples:
 # var a = 2

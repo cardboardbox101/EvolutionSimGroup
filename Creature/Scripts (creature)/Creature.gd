@@ -1,8 +1,8 @@
 extends Node2D
 
 #scenes
-const CIRCLE = preload("res://Scenes/Circle.tscn")
-const JOINT = preload("res://Scenes/Joint.tscn")
+const CIRCLE = preload("res://Creature/Scenes (creature)/Circle.tscn")
+const JOINT = preload("res://Creature/Scenes (creature)/Joint.tscn")
 
 #vars
 var rng = RandomNumberGenerator.new()
@@ -20,7 +20,7 @@ func init(node_number : int, maxX, maxY, minCLen, maxCLen, minELen, maxELen, min
 		circle.name = "circle_" + str(n)
 		circle.position = Vector2(rng.randf_range(position.x - maxX, position.x + maxX), rng.randf_range(position.y - maxY, position.y + maxY))
 		circle.friction = rng.randf_range(minFric, maxFric)
-	
+	print(get_children())
 	if (nodeNumber < 2):
 		jointNumber = 0
 	elif (nodeNumber == 2):
