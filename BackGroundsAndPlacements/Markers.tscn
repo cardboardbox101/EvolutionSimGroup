@@ -16,8 +16,6 @@ margin_right = 52.5062
 margin_bottom = 12.5058
 custom_fonts/normal_font = ExtResource( 2 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
-visible_characters = 18
-percent_visible = 9.0
 fit_content_height = true
 __meta__ = {
 "_edit_use_anchors_": false

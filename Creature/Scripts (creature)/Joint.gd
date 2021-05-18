@@ -3,12 +3,14 @@ extends DampedSpringJoint2D
 #vars
 var defaultLength
 var contractedLength
+var contractedLength2
 
 var contractTime
 var expandTime
 
 onready var timer = $Timer
 var isExpanding
+var frozen = true
 
 #for debug
 func _print():
@@ -33,20 +35,22 @@ func _init_begin():
 #repatedly called after "contract time" and "expand time" seconds have passed
 func _on_Timer_timeout():
 	#called when the timer runs out of time
-	if (isExpanding):
-		rest_length = length #expands length
-		timer.wait_time = expandTime
-		timer.start() #starts the timer to wait "wait_time" seconds
-		isExpanding = false
-	else:
-		rest_length = contractedLength #contracts length
-		timer.wait_time = contractedLength
-		timer.start() #starts the timer to wait "wait_time" seconds
-		isExpanding = true
+	if (!frozen):
+		if (isExpanding):
+			rest_length = length #expands length
+			timer.wait_time = expandTime
+			timer.start() #starts the timer to wait "wait_time" seconds
+			isExpanding = false
+		else:
+			rest_length = contractedLength #contracts length
+			timer.wait_time = contractedLength
+			timer.start() #starts the timer to wait "wait_time" seconds
+			isExpanding = true
 
 #constructor, function is manually called when a new joint is constructed
 func init(contracted_Length, expanded_Length, contract_Time, expand_Time, _stiffness, _damping, _bias, node1 : NodePath, node2: NodePath, startExpand):
 	contractedLength = contracted_Length
+	contractedLength2 = contracted_Length
 	length = expanded_Length
 	
 	contractTime = contract_Time
@@ -60,5 +64,7 @@ func init(contracted_Length, expanded_Length, contract_Time, expand_Time, _stiff
 	node_b = node2
 	
 	isExpanding = startExpand	
+	if (!frozen):
+		_init_begin()
 	
-	_init_begin()
+

@@ -4,7 +4,7 @@ onready var background = preload("res://BackGroundsAndPlacements/Markers.tscn")
 onready var lastSpace = 0
 func _ready():
 	var blankStr = 0
-	for n in 100:
+	for n in 500:
 		var s = background.instance()
 		add_child(s)
 		var vec2 = Vector2(lastSpace,398.5)
@@ -14,4 +14,6 @@ func _ready():
 		blankStr+=1
 		lastSpace+=250
 	pass # Replace with function body.
+
+	
 
