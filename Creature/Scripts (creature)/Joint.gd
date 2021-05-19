@@ -12,6 +12,10 @@ onready var timer = $Timer
 var isExpanding
 var frozen = true
 
+onready var sprite
+
+var constructed = false
+
 #for debug
 func _print():
 	print("Length")
@@ -25,12 +29,27 @@ func _print():
 	print("Bias")
 	print(bias)
 
-#start function (called by construtor)
+func _process(delta):
+	if (constructed):
+		sprite.scale.y = 5
+		sprite.global_scale.x = sqrt(pow((get_node(node_a).global_position.x - get_node(node_b).global_position.x), 2) + pow((get_node(node_a).global_position.y - get_node(node_b).global_position.y), 2))
+		
+		sprite.rotation = (atan2(get_node(node_a).global_position.y - get_node(node_b).global_position.y, get_node(node_a).global_position.x - get_node(node_b).global_position.x))
+		
+		#TRY!!!! TO FIND A WAY TO ROTATE SPRITE TO MATCH BOTH NODES
+		#THE SPRITE IS IN THE MIDDLE OF BOTH NODES AND THE CORRECT LENGTH
+		
+		sprite.global_position = Vector2((get_node(node_a).global_position.x + get_node(node_b).global_position.x) / 2, (get_node(node_a).global_position.y + get_node(node_b).global_position.y) / 2)
+		
+func rotate_spring():
+	sprite.rotate(.1)
+
+#start function (called by constructor)
 func _init_begin():
-		rest_length = contractedLength
-		timer.wait_time = contractedLength
-		timer.start()
-		isExpanding = true
+	rest_length = contractedLength
+	timer.wait_time = contractedLength
+	timer.start()
+	isExpanding = true
 
 #repatedly called after "contract time" and "expand time" seconds have passed
 func _on_Timer_timeout():
@@ -63,8 +82,21 @@ func init(contracted_Length, expanded_Length, contract_Time, expand_Time, _stiff
 	node_a = node1
 	node_b = node2
 	
-	isExpanding = startExpand	
+	if stiffness < 5:
+		$w.visible = true
+		sprite = $w
+	elif stiffness < 10:
+		$lg.visible = true
+		sprite = $lg
+	elif stiffness < 15:
+		$dg.visible = true
+		sprite = $dg
+	else:
+		$b.visible = true
+		sprite = $b
+	
+	constructed = true
+	
+	isExpanding = startExpand
 	if (!frozen):
 		_init_begin()
-	
-
