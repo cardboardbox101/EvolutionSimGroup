@@ -33,7 +33,6 @@ func _process(delta):
 	if (constructed):
 		sprite.scale.y = 5
 		sprite.global_scale.x = sqrt(pow((get_node(node_a).global_position.x - get_node(node_b).global_position.x), 2) + pow((get_node(node_a).global_position.y - get_node(node_b).global_position.y), 2))
-		
 		sprite.rotation = (atan2(get_node(node_a).global_position.y - get_node(node_b).global_position.y, get_node(node_a).global_position.x - get_node(node_b).global_position.x))
 		
 		#TRY!!!! TO FIND A WAY TO ROTATE SPRITE TO MATCH BOTH NODES
@@ -41,9 +40,6 @@ func _process(delta):
 		
 		sprite.global_position = Vector2((get_node(node_a).global_position.x + get_node(node_b).global_position.x) / 2, (get_node(node_a).global_position.y + get_node(node_b).global_position.y) / 2)
 		
-func rotate_spring():
-	sprite.rotate(.1)
-
 #start function (called by constructor)
 func _init_begin():
 	rest_length = contractedLength
