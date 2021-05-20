@@ -10,7 +10,7 @@ var expandTime
 
 onready var timer = $Timer
 var isExpanding
-var frozen = true
+var frozen = false
 
 onready var sprite
 
@@ -43,7 +43,7 @@ func _process(delta):
 #start function (called by constructor)
 func _init_begin():
 	rest_length = contractedLength
-	timer.wait_time = contractedLength
+	timer.wait_time = contractTime
 	timer.start()
 	isExpanding = true
 
@@ -58,7 +58,7 @@ func _on_Timer_timeout():
 			isExpanding = false
 		else:
 			rest_length = contractedLength #contracts length
-			timer.wait_time = contractedLength
+			timer.wait_time = contractTime
 			timer.start() #starts the timer to wait "wait_time" seconds
 			isExpanding = true
 
@@ -77,6 +77,7 @@ func init(contracted_Length, expanded_Length, contract_Time, expand_Time, _stiff
 	
 	node_a = node1
 	node_b = node2
+	
 	
 	if stiffness < 5:
 		$w.visible = true

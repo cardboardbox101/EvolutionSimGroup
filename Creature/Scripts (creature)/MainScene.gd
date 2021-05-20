@@ -16,7 +16,7 @@ func _ready():
 	creature = CREATURE.instance()
 	add_child(creature)
 	creature.init(4, 250, 250, 50, 100, 150, 200, 1, 4, 1, 4, 1, 20, 0.1, 1, 0.1, 0.5, 0, 1)
-	creature.position = Vector2(250, 250)
+	creature.position = $Position2D.global_position
 
 func _on_Timer_timeout():
 	x += 1
@@ -26,6 +26,7 @@ func _on_Timer_timeout():
 			creature.queue_free()
 		#creates creature
 		creature = CREATURE.instance()
+		creature.position = $Position2D.global_position
 		add_child(creature)
 		creature.init(rng.randi_range(3, 6), 150, 150, 50, 100, 150, 200, 1, 4, 1, 4, 1, 20, 0.1, 1, 0.1, 0.5, 0, 1)
 		arr.append(creature)
@@ -38,7 +39,7 @@ func _on_Timer_timeout():
 		if x< 5000:
 			x = x+500
 		if (arr[n] != null):
-			arr[n]._freezeJoints()
+			# arr[n]._freezeJoints()
 			arr[n].global_position = Vector2(x,y)
 
 	a = true

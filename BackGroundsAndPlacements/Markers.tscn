@@ -6,14 +6,15 @@
 [node name="Markers" type="Node2D"]
 
 [node name="PlaceMarker" type="Sprite" parent="."]
+position = Vector2( 40.736, 1238.95 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 1 )
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-margin_left = -42.4938
-margin_top = -86.4942
-margin_right = 52.5062
-margin_bottom = 12.5058
+margin_left = -6.64956
+margin_top = 1150.13
+margin_right = 88.3504
+margin_bottom = 1249.13
 custom_fonts/normal_font = ExtResource( 2 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
 fit_content_height = true
