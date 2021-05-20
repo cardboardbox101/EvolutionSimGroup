@@ -26,9 +26,9 @@ func _on_Timer_timeout():
 			creature.queue_free()
 		#creates creature
 		creature = CREATURE.instance()
-		creature.position = $Position2D.global_position
 		add_child(creature)
 		creature.init(rng.randi_range(3, 6), 150, 150, 50, 100, 150, 200, 1, 4, 1, 4, 1, 20, 0.1, 1, 0.1, 0.5, 0, 1)
+		creature.position = $Position2D.global_position
 		arr.append(creature)
 	var x = 0
 	var y = 0

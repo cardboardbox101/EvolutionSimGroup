@@ -14,6 +14,11 @@ var joints = []
 
 var distanceTravelled = 0
 
+var originalNodeAvgPos = Vector2()
+var nodeAvgPos = Vector2()
+var originalCalculated = false
+
+#method used for breeding
 func averageNodeAndJoints(c1, c2):
 	var smallest
 	var j
@@ -47,6 +52,22 @@ func averageNodeAndJoints(c1, c2):
 		j.stiffness = (j1.stiffness + j2.stiffness) / 2
 		j.damping = (j1.damping + j2.damping) / 2
 		j.bias = (j1.bias + j2.bias) / 2
+
+func _process(delta):
+	if (!originalCalculated):
+		for i in nodeNumber:
+			originalNodeAvgPos.x += get_node("circle_" + str(i)).global_position.x
+			originalNodeAvgPos.y += get_node("circle_" + str(i)).global_position.y
+		originalNodeAvgPos.x = originalNodeAvgPos.x / nodeNumber
+		originalNodeAvgPos.y = originalNodeAvgPos.y / nodeNumber
+		originalCalculated = true
+	else:
+		for n in nodeNumber:
+			nodeAvgPos.x += get_node("circle_" + str(n)).global_position.x
+			nodeAvgPos.y += get_node("circle_" + str(n)).global_position.y
+		nodeAvgPos.x = nodeAvgPos.x / nodeNumber
+		nodeAvgPos.y = nodeAvgPos.y/ nodeNumber
+
 
 #constructor, call manually with all values
 func init(node_number : int, maxX, maxY, minCLen, maxCLen, minELen, maxELen, minCTime, maxCTime, minETime, maxETime, minStiff, maxStiff, minDamp, maxDamp, minBias, maxBias, minFric, maxFric):
@@ -102,7 +123,7 @@ func init(node_number : int, maxX, maxY, minCLen, maxCLen, minELen, maxELen, min
 		
 		#initializes with random values in ranges given by the constructor
 		joint.init(rng.randf_range(minCLen, maxCLen), rng.randf_range(minELen, maxELen), rng.randf_range(minCTime, maxCTime), rng.randf_range(minETime, maxETime), rng.randf_range(minStiff, maxStiff), rng.randf_range(minDamp, maxDamp), rng.randf_range(minBias, maxBias), nodePathA, nodePathB, false)
-		
+
 func _freezeJoints():
 	for i in joints.size():
 		joints[i].frozen = true
