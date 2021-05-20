@@ -8,7 +8,45 @@ const JOINT = preload("res://Creature/Scenes (creature)/Joint.tscn")
 var rng = RandomNumberGenerator.new()
 var nodeNumber
 var jointNumber
+
+var nodes = []
 var joints = []
+
+var distanceTravelled = 0
+
+func averageNodeAndJoints(c1, c2):
+	var smallest
+	var j
+	var j1
+	var j2
+	
+	if c1.nodes.size() > c2.nodes.size():
+		smallest = c2.nodes.size()
+	else:
+		smallest = c1.nodes.size()
+	
+	for n in smallest:
+		get_node("circle_" + str(n)).global_position.x = (c1.get_node("circle_" + str(n)).global_position.x + c2.get_node("circle_" + str(n)).global_position.x) / 2
+		get_node("circle_" + str(n)).global_position.y = (c1.get_node("circle_" + str(n)).global_position.y + c2.get_node("circle_" + str(n)).global_position.y) / 2
+		get_node("circle_" + str(n)).friction =  (c1.get_node("circle_" + str(n)).friction + c2.get_node("circle_" + str(n)).friction) / 2
+	
+	#reset joint positions and rotations
+	for n in jointNumber:
+		j = get_node("joint_" + str(n))
+		j1 = c1.get_node("joint_" + str(n))
+		j2 = c2.get_node("joint_" + str(n))
+		
+		
+		get_node("joint_" + str(n)).position = Vector2((get_node("joint_" + str(n)).node_a.position.x + get_node("joint_" + str(n)).node_b.position.x) / 2, (get_node("joint_" + str(n)).node_a.position.y + get_node("joint_" + str(n)).node_b.position.y) / 2)
+		get_node("joint_" + str(n)).rotate(-(atan((get_node("joint_" + str(n)).node_a.position.x - get_node("joint_" + str(n)).node_b.position.x)/(get_node("joint_" + str(n)).node_a.position.y - get_node("joint_" + str(n)).node_b.position.y))))
+		
+		j.contractedLength = (j1.contractedLength + j2.contractedLength) / 2
+		j.length = (j1.length + j2.length) / 2
+		j.contractTime = (j1.contractTime + j2.contractTime) / 2
+		j.expandTime = (j1.expandTime + j2.expandTime) / 2
+		j.stiffness = (j1.stiffness + j2.stiffness) / 2
+		j.damping = (j1.damping + j2.damping) / 2
+		j.bias = (j1.bias + j2.bias) / 2
 
 #constructor, call manually with all values
 func init(node_number : int, maxX, maxY, minCLen, maxCLen, minELen, maxELen, minCTime, maxCTime, minETime, maxETime, minStiff, maxStiff, minDamp, maxDamp, minBias, maxBias, minFric, maxFric):
@@ -21,6 +59,8 @@ func init(node_number : int, maxX, maxY, minCLen, maxCLen, minELen, maxELen, min
 		circle.name = "circle_" + str(n)
 		circle.position = Vector2(rng.randf_range(position.x - maxX, position.x + maxX), rng.randf_range(position.y - maxY, position.y + maxY))
 		circle.friction = rng.randf_range(minFric, maxFric)
+		nodes.append(circle.name)
+
 	if (nodeNumber < 2):
 		jointNumber = 0
 	elif (nodeNumber == 2):
@@ -53,6 +93,7 @@ func init(node_number : int, maxX, maxY, minCLen, maxCLen, minELen, maxELen, min
 		
 		var joint = JOINT.instance()
 		add_child(joint)
+		joint.name = "joint_" + str(n)
 		joints.append(joint)
 		#places the joint in between both circles
 		joint.position = Vector2((nodeAPos.x + nodeBPos.x) / 2, (nodeAPos.y + nodeBPos.y) / 2)
