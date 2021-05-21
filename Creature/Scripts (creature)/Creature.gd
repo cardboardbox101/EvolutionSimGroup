@@ -5,7 +5,7 @@ const CIRCLE = preload("res://Creature/Scenes (creature)/Circle.tscn")
 const JOINT = preload("res://Creature/Scenes (creature)/Joint.tscn")
 
 #vars
-var rng = RandomNumberGenerator.new()
+var rng
 var nodeNumber
 var jointNumber
 
@@ -70,9 +70,10 @@ func _process(delta):
 
 
 #constructor, call manually with all values
-func init(node_number : int, maxX, maxY, minCLen, maxCLen, minELen, maxELen, minCTime, maxCTime, minETime, maxETime, minStiff, maxStiff, minDamp, maxDamp, minBias, maxBias, minFric, maxFric):
+func init(node_number : int, maxX, maxY, minCLen, maxCLen, minELen, maxELen, minCTime, maxCTime, minETime, maxETime, minStiff, maxStiff, minDamp, maxDamp, minBias, maxBias, minFric, maxFric, rang):
 	nodeNumber = node_number
 	
+	rng = rang
 	#creating the circles (which are a scene)
 	for n in nodeNumber:
 		var circle = CIRCLE.instance()

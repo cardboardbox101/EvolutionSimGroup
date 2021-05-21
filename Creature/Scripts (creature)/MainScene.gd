@@ -16,19 +16,19 @@ func _ready():
 	for c in 200:
 		create = CREATURE.instance()
 		add_child(create)
-		create.init(rng.randi_range(3, 6), 250, 250, 50, 100, 150, 200, 1, 4, 1, 4, 1, 20, 0.1, 1, 0.1, 0.5, 0, 1)
+		create.init(rng.randi_range(3, 6), 250, 250, 50, 200, 150, 400, 1, 7, 1, 7, 1, 20, 0.1, 1, 0.1, 2, 0, 1, rng)
 		create.position = $Position2D.position
 	print("READY")
 	timer.wait_time = 3
 	#timer.start()
 	creature = CREATURE.instance()
 	add_child(creature)
-	creature.init(4, 250, 250, 50, 100, 150, 200, 1, 4, 1, 4, 1, 20, 0.1, 1, 0.1, 0.5, 0, 1)
+	creature.init(4, 250, 250, 50, 100, 150, 200, 1, 4, 1, 4, 1, 20, 0.1, 1, 0.1, 0.5, 0, 1, rng)
 	creature.position = $Position2D.global_position
 	var creature2 = CREATURE.instance()
 	add_child(creature2)
 	arr.append(creature2)
-	creature2.init(3, 250, 250, 50, 100, 150, 200, 1, 4, 1, 4, 1, 20, 0.1, 1, 0.1, 0.5, 0, 1)
+	creature2.init(3, 250, 250, 50, 100, 150, 200, 1, 4, 1, 4, 1, 20, 0.1, 1, 0.1, 0.5, 0, 1, rng)
 	creature2._setGravity(0)
 	creature2.position = $Position2D.global_position
 	testCreatues()
