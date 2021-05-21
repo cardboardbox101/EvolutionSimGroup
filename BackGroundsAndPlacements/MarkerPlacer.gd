@@ -22,7 +22,7 @@ func _ready():
 		s.translate(vec2)
 		s.get_child(1).text = String(blankStr)
 		s.z_index = 100
-		blankStr+=1
+		blankStr-=1
 		lastSpace-= 750
 	pass # Replace with function body.
 
