@@ -12,6 +12,12 @@ var a = false
 var x = 0
 
 func _ready():
+	var create
+#	for c in 1000:
+#		create = CREATURE.instance()
+#		add_child(create)
+#		create.init(rng.randi_range(3, 6), 250, 250, 50, 100, 150, 200, 1, 4, 1, 4, 1, 20, 0.1, 1, 0.1, 0.5, 0, 1)
+#		creature.position = $Position2D.position
 	print("READY")
 	timer.wait_time = 3
 	#timer.start()
@@ -24,6 +30,7 @@ func _ready():
 	arr.append(creature2)
 	creature2.init(3, 250, 250, 50, 100, 150, 200, 1, 4, 1, 4, 1, 20, 0.1, 1, 0.1, 0.5, 0, 1)
 	creature2._setGravity(0)
+	creature2.position = $Position2D.global_position
 	testCreatues()
 
 func _on_Timer_timeout():

@@ -6,6 +6,7 @@
 extents = Vector2( 32.4418, 32.6673 )
 
 [node name="Circle" type="RigidBody2D"]
+collision_layer = 2
 mode = 2
 
 [node name="Sprite" type="Sprite" parent="."]
