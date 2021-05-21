@@ -128,7 +128,9 @@ func _freezeJoints():
 	for i in joints.size():
 		joints[i].frozen = true
 	
-	
+func _setGravity(newGrav):
+	pass
+		#nodes[i].gravity_scale = 0
 func _unfreezeJoints():
 	for i in joints.size():
 		joints[i].frozen = false

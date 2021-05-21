@@ -20,9 +20,15 @@ script = ExtResource( 1 )
 script = ExtResource( 3 )
 
 [node name="Position2D" type="Position2D" parent="."]
-position = Vector2( 1612.5, 1059.06 )
+position = Vector2( 0, 1059.06 )
 
 [node name="Camera" parent="." instance=ExtResource( 4 )]
 
+[node name="CreatureCountdown" type="Timer" parent="."]
+
+[node name="TheFarm" type="Position2D" parent="."]
+position = Vector2( 0, -1446.81 )
+
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="Timer2" to="." method="_on_Timer2_timeout"]
+[connection signal="timeout" from="CreatureCountdown" to="." method="_on_CreatureCountdown_timeout"]
