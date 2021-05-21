@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://BackGroundsAndPlacements/BackgroundPlacer.gd" type="Script" id=1]
 [ext_resource path="res://Creature/Scripts (creature)/MainScene.gd" type="Script" id=2]
 [ext_resource path="res://BackGroundsAndPlacements/MarkerPlacer.gd" type="Script" id=3]
+[ext_resource path="res://Creature/Scenes (creature)/Camera.tscn" type="PackedScene" id=4]
 
 [node name="MainScene" type="Node2D"]
 z_index = 100
@@ -20,6 +21,8 @@ script = ExtResource( 3 )
 
 [node name="Position2D" type="Position2D" parent="."]
 position = Vector2( 1612.5, 1059.06 )
+
+[node name="Camera" parent="." instance=ExtResource( 4 )]
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="Timer2" to="." method="_on_Timer2_timeout"]

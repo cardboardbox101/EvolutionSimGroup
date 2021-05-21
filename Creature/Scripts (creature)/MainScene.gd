@@ -99,3 +99,6 @@ func testCreatues():
 func avg(num1, num2):
 	#takes the average between two numbers
 	return (num1 + num2) / 2
+	
+func getCreaturePosition():
+	return creature.nodeAvgPos
