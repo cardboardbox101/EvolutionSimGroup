@@ -106,6 +106,8 @@ func init(node_number : int, maxX, maxY, minCLen, maxCLen, minELen, maxELen, min
 		var nodePathB = "../" + circleB
 		var nodeAPos = nodeA.position
 		var nodeBPos = nodeB.position
+		var nodeAGPos = nodeA.global_position
+		var nodeBGpos = nodeB.global_position
 		
 		var randBool = rng.randi_range(0, 1)
 		if (randBool == 0):
@@ -117,12 +119,11 @@ func init(node_number : int, maxX, maxY, minCLen, maxCLen, minELen, maxELen, min
 		add_child(joint)
 		joint.name = "joint_" + str(n)
 		joints.append(joint)
-		#places the joint in between both circles
-		joint.position = Vector2((nodeAPos.x + nodeBPos.x) / 2, (nodeAPos.y + nodeBPos.y) / 2)
-		#uses inverse tangent to rotate the joint towards one of the circles
-		joint.rotate(-(atan((nodeAPos.x - nodeBPos.x)/(nodeAPos.y - nodeBPos.y))))
 		
-		#initializes with random values in ranges given by the constructor
+		#joint.position = Vector2((nodeAPos.x + nodeBPos.x) / 2, (nodeAPos.y + nodeBPos.y) / 2)
+		#joint.rotate(-(atan((nodeAPos.x - nodeBPos.x)/(nodeAPos.y - nodeBPos.y))))
+		#joint.rotate(atan2(nodeAPos.y - nodeAPos.y, nodeAPos.x - nodeAPos.x))
+		
 		joint.init(rng.randf_range(minCLen, maxCLen), rng.randf_range(minELen, maxELen), rng.randf_range(minCTime, maxCTime), rng.randf_range(minETime, maxETime), rng.randf_range(minStiff, maxStiff), rng.randf_range(minDamp, maxDamp), rng.randf_range(minBias, maxBias), nodePathA, nodePathB, false)
 
 func _freezeJoints():
