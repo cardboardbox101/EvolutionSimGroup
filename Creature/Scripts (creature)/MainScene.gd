@@ -3,6 +3,7 @@ extends Node2D
 const CREATURE = preload("res://Creature/Scenes (creature)/Creature.tscn")
 var rng = RandomNumberGenerator.new()
 var arr = []
+var arr2 = []
 var lastCreature = 0
 onready var timer = $Timer
 onready var timer2 = $Timer2
@@ -13,9 +14,10 @@ var x = 0
 
 func _ready():
 	var create
-	for c in 200:
+	for c in 500:
 		create = CREATURE.instance()
 		add_child(create)
+		arr.append(create)
 		create.init(rng.randi_range(3, 6), 250, 250, 50, 200, 150, 400, 1, 7, 1, 7, 1, 20, 0.1, 1, 0.1, 2, 0, 1, rng)
 		create.position = $Position2D.position
 	print("READY")
@@ -109,8 +111,8 @@ func newGeneration():
 
 func testCreatues():
 	#TO BE WRITTEN
-#	testTimer.wait_time = 15
-#	testTimer.start()
+	testTimer.wait_time = 15
+	testTimer.start()
 	pass
 
 func avg(num1, num2):
@@ -121,12 +123,14 @@ func getCreaturePosition():
 	return creature.nodeAvgPos
 
 func _on_CreatureCountdown_timeout():
-	creature._freezeJoints()
-	print(str(creature.position))
-	creature.global_position = $TheFarm.position
-	print(str(creature.position))
-	creature.distanceTravelled = abs(creature.nodeAvgPos.x - creature.originalNodeAvgPos.x)
-	print("TESTING COMPLETE....FINAL DISTANCE: " + str(creature.distanceTravelled))
-	creature = arr[0]
-	creature.position = $Position2D.position
+	for crts in arr.size():
+		arr[crts]._freezeJoints()
+		arr[crts].distanceTravelled = abs(arr[crts].nodeAvgPos.x - arr[crts].originalNodeAvgPos.x)
+		print("Creature " + str(crts) + " | Final Pos: " + str(arr[crts].nodeAvgPos) + " | ABS of Distance: " + str(arr[crts].distanceTravelled))
+	sortCreatures()
+	for crts2 in arr.size():
+		arr2.append(arr[crts2].distanceTravelled)
+	for dist in arr2.size():
+		print(str(arr2[dist]))
+	testTimer.stop()
 	pass # Replace with function body.
