@@ -86,8 +86,8 @@ func breedCreatures():
 		
 		var newCreature = CREATURE.instance()
 		add_child(newCreature)
-		newCreature.init(avg(creature1.nodeNumber, creature2.nodeNumber), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,rng, false)
-		newCreature.averageNodesAndJoints(creature1, creature2)
+		newCreature.init(avg(creature1.nodeNumber, creature2.nodeNumber), 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,rng, false)
+		newCreature.averageNodeAndJoints(creature1, creature2)
 	#now the array is unsorted until creatures are tested again
 
 func killCreatures():
