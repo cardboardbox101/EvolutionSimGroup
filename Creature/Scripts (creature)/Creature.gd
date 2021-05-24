@@ -22,20 +22,27 @@ var originalCalculated = false
 #method used for breeding
 func averageNodeAndJoints(c1, c2):
 	var smallest
+	var largestC
 	var j
 	var j1
 	var j2
 	
 	if c1.nodes.size() > c2.nodes.size():
 		smallest = c2.nodes.size()
+		largestC = c1
 	else:
 		smallest = c1.nodes.size()
+		largestC = c2
 	
 	for n in smallest:
 		get_node("circle_" + str(n)).global_position.x = (c1.get_node("circle_" + str(n)).global_position.x + c2.get_node("circle_" + str(n)).global_position.x) / 2
 		get_node("circle_" + str(n)).global_position.y = (c1.get_node("circle_" + str(n)).global_position.y + c2.get_node("circle_" + str(n)).global_position.y) / 2
 		get_node("circle_" + str(n)).friction =  (c1.get_node("circle_" + str(n)).friction + c2.get_node("circle_" + str(n)).friction) / 2
 	
+	for i in range (smallest, nodeNumber):
+		get_node("circle_" + str(i)).global_position = largestC.get_node("circle_" + str(i)).global_position
+		get_node("circle_" + str(i)).friction = largestC.get_node("circle_" + str(i)).friction
+		
 	#reset joint positions and rotations
 	for n in jointNumber:
 		j = get_node("joint_" + str(n))
