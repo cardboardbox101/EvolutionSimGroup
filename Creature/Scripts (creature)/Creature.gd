@@ -11,6 +11,7 @@ var jointNumber
 
 var nodes = []
 var joints = []
+var startingCreature = false
 
 var distanceTravelled = 0
 
@@ -42,8 +43,8 @@ func averageNodeAndJoints(c1, c2):
 		j2 = c2.get_node("joint_" + str(n))
 		
 		
-		get_node("joint_" + str(n)).position = Vector2((get_node("joint_" + str(n)).node_a.position.x + get_node("joint_" + str(n)).node_b.position.x) / 2, (get_node("joint_" + str(n)).node_a.position.y + get_node("joint_" + str(n)).node_b.position.y) / 2)
-		get_node("joint_" + str(n)).rotate(-(atan((get_node("joint_" + str(n)).node_a.position.x - get_node("joint_" + str(n)).node_b.position.x)/(get_node("joint_" + str(n)).node_a.position.y - get_node("joint_" + str(n)).node_b.position.y))))
+		#get_node("joint_" + str(n)).position = Vector2((get_node("joint_" + str(n)).node_a.position.x + get_node("joint_" + str(n)).node_b.position.x) / 2, (get_node("joint_" + str(n)).node_a.position.y + get_node("joint_" + str(n)).node_b.position.y) / 2)
+		#get_node("joint_" + str(n)).rotate(-(atan((get_node("joint_" + str(n)).node_a.position.x - get_node("joint_" + str(n)).node_b.position.x)/(get_node("joint_" + str(n)).node_a.position.y - get_node("joint_" + str(n)).node_b.position.y))))
 		
 		j.contractedLength = (j1.contractedLength + j2.contractedLength) / 2
 		j.length = (j1.length + j2.length) / 2
@@ -70,9 +71,9 @@ func _process(delta):
 
 
 #constructor, call manually with all values
-func init(node_number : int, maxX, maxY, minCLen, maxCLen, minELen, maxELen, minCTime, maxCTime, minETime, maxETime, minStiff, maxStiff, minDamp, maxDamp, minBias, maxBias, minFric, maxFric, rang):
+func init(node_number : int, maxX, maxY, minCLen, maxCLen, minELen, maxELen, minCTime, maxCTime, minETime, maxETime, minStiff, maxStiff, minDamp, maxDamp, minBias, maxBias, minFric, maxFric, rang, starting):
 	nodeNumber = node_number
-	
+	startingCreature = starting
 	rng = rang
 	#creating the circles (which are a scene)
 	for n in nodeNumber:

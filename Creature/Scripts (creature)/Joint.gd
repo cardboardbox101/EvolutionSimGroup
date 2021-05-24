@@ -15,6 +15,7 @@ var frozen = false
 onready var sprite
 
 var constructed = false
+var brode = false
 
 #for debug
 func _print():
@@ -67,7 +68,6 @@ func init(contracted_Length, expanded_Length, contract_Time, expand_Time, _stiff
 	contractedLength = contracted_Length
 	contractedLength2 = contracted_Length
 	length = expanded_Length
-	
 	contractTime = contract_Time
 	expandTime = expand_Time
 	
