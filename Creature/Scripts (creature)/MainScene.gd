@@ -18,7 +18,7 @@ func _ready():
 		create = CREATURE.instance()
 		add_child(create)
 		arr.append(create)
-		create.init(rng.randi_range(3, 6), 250, 250, 50, 200, 150, 400, 1, 7, 1, 7, 1, 20, 0.1, 1, 0.1, 2, 0, 1, rng,true)
+		create.init(rng.randi_range(3, 6), 250, 250, 50, 200, 150, 400, 1, 7, 1, 7, 1, 20, 0.1, 1, 0.1, 2, 0, 1, rng, true)
 		create.position = $Position2D.position
 	timer.wait_time = 3
 	#timer.start()
@@ -89,7 +89,6 @@ func breedCreatures():
 		add_child(newCreature)
 		newCreature.init(avg(creature1.nodeNumber, creature2.nodeNumber), 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,rng, false)
 		newCreature.averageNodeAndJoints(creature1, creature2)
-	#now the array is unsorted until creatures are tested again
 
 func killCreatures():
 	#kills creatures

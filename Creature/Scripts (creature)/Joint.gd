@@ -48,6 +48,25 @@ func _init_begin():
 	timer.start()
 	isExpanding = true
 
+func set_color():
+	$w.visible = false
+	$lg.visible = false
+	$dg.visible = false
+	$b.visible = false
+	
+	if stiffness < 5:
+		$w.visible = true
+		sprite = $w
+	elif stiffness < 10:
+		$lg.visible = true
+		sprite = $lg
+	elif stiffness < 15:
+		$dg.visible = true
+		sprite = $dg
+	else:
+		$b.visible = true
+		sprite = $b
+
 #repatedly called after "contract time" and "expand time" seconds have passed
 func _on_Timer_timeout():
 	#called when the timer runs out of time
@@ -78,20 +97,7 @@ func init(contracted_Length, expanded_Length, contract_Time, expand_Time, _stiff
 	node_a = node1
 	node_b = node2
 	
-	
-	if stiffness < 5:
-		$w.visible = true
-		sprite = $w
-	elif stiffness < 10:
-		$lg.visible = true
-		sprite = $lg
-	elif stiffness < 15:
-		$dg.visible = true
-		sprite = $dg
-	else:
-		$b.visible = true
-		sprite = $b
-	
+	set_color()
 	constructed = true
 	
 	isExpanding = startExpand

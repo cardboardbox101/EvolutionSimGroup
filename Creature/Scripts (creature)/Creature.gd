@@ -49,9 +49,6 @@ func averageNodeAndJoints(c1, c2):
 		j1 = c1.get_node("joint_" + str(n))
 		j2 = c2.get_node("joint_" + str(n))
 		
-		
-		#get_node("joint_" + str(n)).position = Vector2((get_node("joint_" + str(n)).node_a.position.x + get_node("joint_" + str(n)).node_b.position.x) / 2, (get_node("joint_" + str(n)).node_a.position.y + get_node("joint_" + str(n)).node_b.position.y) / 2)
-		#get_node("joint_" + str(n)).rotate(-(atan((get_node("joint_" + str(n)).node_a.position.x - get_node("joint_" + str(n)).node_b.position.x)/(get_node("joint_" + str(n)).node_a.position.y - get_node("joint_" + str(n)).node_b.position.y))))
 		if (j1 != null and j2 != null):
 			j.contractedLength = (j1.contractedLength + j2.contractedLength) / 2
 			j.length = (j1.length + j2.length) / 2
@@ -76,6 +73,7 @@ func averageNodeAndJoints(c1, c2):
 			j.stiffness = (0 + j2.stiffness) / 2
 			j.damping = (0 + j2.damping) / 2
 			j.bias = (0 + j2.bias) / 2
+		j.set_color()
 
 func _process(delta):
 	if (!originalCalculated):
