@@ -97,13 +97,13 @@ func killCreatures():
 	
 	var rand
 	var numKilled = 0
-	
+	print(arr.size())
 	for n in arr.size():
 		rand = rng.randi_range(0, arr.size())
 		if rand < n and numKilled < arr.size() / 2:
-			arr.remove(n)
 			arr[n].queue_free()
 			numKilled += 1
+	print(arr.size())
 	sortCreatures()
 
 func newGeneration():
