@@ -14,7 +14,7 @@ var x = 0
 
 func _ready():
 	var create
-	for c in 200:
+	for c in 250:
 		create = CREATURE.instance()
 		add_child(create)
 		arr.append(create)
@@ -102,6 +102,7 @@ func killCreatures():
 		rand = rng.randi_range(0, arr.size())
 		if rand < n and numKilled < arr.size() / 2:
 			arr.remove(n)
+			arr[n].queue_free()
 			numKilled += 1
 	sortCreatures()
 

@@ -45,14 +45,30 @@ func averageNodeAndJoints(c1, c2):
 		
 		#get_node("joint_" + str(n)).position = Vector2((get_node("joint_" + str(n)).node_a.position.x + get_node("joint_" + str(n)).node_b.position.x) / 2, (get_node("joint_" + str(n)).node_a.position.y + get_node("joint_" + str(n)).node_b.position.y) / 2)
 		#get_node("joint_" + str(n)).rotate(-(atan((get_node("joint_" + str(n)).node_a.position.x - get_node("joint_" + str(n)).node_b.position.x)/(get_node("joint_" + str(n)).node_a.position.y - get_node("joint_" + str(n)).node_b.position.y))))
-		
-		j.contractedLength = (j1.contractedLength + j2.contractedLength) / 2
-		j.length = (j1.length + j2.length) / 2
-		j.contractTime = (j1.contractTime + j2.contractTime) / 2
-		j.expandTime = (j1.expandTime + j2.expandTime) / 2
-		j.stiffness = (j1.stiffness + j2.stiffness) / 2
-		j.damping = (j1.damping + j2.damping) / 2
-		j.bias = (j1.bias + j2.bias) / 2
+		if (j1 != null and j2 != null):
+			j.contractedLength = (j1.contractedLength + j2.contractedLength) / 2
+			j.length = (j1.length + j2.length) / 2
+			j.contractTime = (j1.contractTime + j2.contractTime) / 2
+			j.expandTime = (j1.expandTime + j2.expandTime) / 2
+			j.stiffness = (j1.stiffness + j2.stiffness) / 2
+			j.damping = (j1.damping + j2.damping) / 2
+			j.bias = (j1.bias + j2.bias) / 2
+		elif (j1 != null and j2 == null):
+			j.contractedLength = (j1.contractedLength + 0) / 2
+			j.length = (j1.length + 0) / 2
+			j.contractTime = (j1.contractTime + 0) / 2
+			j.expandTime = (j1.expandTime + 0) / 2
+			j.stiffness = (j1.stiffness + 0) / 2
+			j.damping = (j1.damping + 0) / 2
+			j.bias = (j1.bias + 0) / 2
+		else:
+			j.contractedLength = (0 + j2.contractedLength) / 2
+			j.length = (0 + j2.length) / 2
+			j.contractTime = (0 + j2.contractTime) / 2
+			j.expandTime = (0 + j2.expandTime) / 2
+			j.stiffness = (0 + j2.stiffness) / 2
+			j.damping = (0 + j2.damping) / 2
+			j.bias = (0 + j2.bias) / 2
 
 func _process(delta):
 	if (!originalCalculated):
