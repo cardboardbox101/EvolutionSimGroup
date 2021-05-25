@@ -18,11 +18,12 @@ func _ready():
 		create = CREATURE.instance()
 		add_child(create)
 		arr.append(create)
-		create.init(rng.randi_range(3, 6), 250, 250, 50, 200, 150, 400, 1, 7, 1, 7, 1, 20, 0.1, 1, 0.1, 2, 0, 1, rng,true)
+		create.init(rng.randi_range(3, 6), 250, 250, 50, 200, 150, 400, 1, 7, 1, 7, 1, 20, 0.1, 1, 0.1, 2, 0, 1, rng, true)
 		create.position = $Position2D.position
-	print("READY")
 	timer.wait_time = 3
 	#timer.start()
+
+	#IS THIS CODE NECCESARY?
 	creature = CREATURE.instance()
 	add_child(creature)
 	creature.init(4, 250, 250, 50, 100, 150, 200, 1, 4, 1, 4, 1, 20, 0.1, 1, 0.1, 0.5, 0, 1, rng, true)
@@ -86,7 +87,7 @@ func breedCreatures():
 		
 		var newCreature = CREATURE.instance()
 		add_child(newCreature)
-		newCreature.init(avg(creature1.nodeNumber, creature2.nodeNumber), 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,rng, false)
+		newCreature.init(avg(creature1.nodeNumber, creature2.nodeNumber), 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, rng, false)
 		newCreature.averageNodeAndJoints(creature1, creature2)
 		arr.append(newCreature)
 	#now the array is unsorted until creatures are tested again
@@ -101,8 +102,15 @@ func killCreatures():
 	print(arr.size())
 	var n = 0
 	while n < arr.size():
+	var numToKill = arr.size() / 2
+	
+	for n in arr.size():
 		rand = rng.randi_range(0, arr.size())
-		if rand < n and numKilled < arr.size() / 2:
+		if rand < n and numKilled < numToKill:
+			arr[n].queue_free()
+			numKilled += 1
+	if (numKilled < numToKill):
+		for n in range (arr.size() - 1, 0, -1):
 			arr[n].queue_free()
 			arr.remove(n)
 			numKilled += 1
@@ -117,7 +125,7 @@ func newGeneration():
 
 func testCreatues():
 	#TO BE WRITTEN
-	testTimer.wait_time = 15
+	testTimer.wait_time = 2
 	testTimer.start()
 	pass
 
@@ -132,12 +140,12 @@ func _on_CreatureCountdown_timeout():
 	for crts in arr.size():
 		arr[crts]._freezeJoints()
 		arr[crts].distanceTravelled = abs(arr[crts].nodeAvgPos.x - arr[crts].originalNodeAvgPos.x)
-		print("Creature " + str(crts) + " | Final Pos: " + str(arr[crts].nodeAvgPos) + " | ABS of Distance: " + str(arr[crts].distanceTravelled))
+#		print("Creature " + str(crts) + " | Final Pos: " + str(arr[crts].nodeAvgPos) + " | ABS of Distance: " + str(arr[crts].distanceTravelled))
 	sortCreatures()
 	for crts2 in arr.size():
 		arr2.append(arr[crts2].distanceTravelled)
-	for dist in arr2.size():
-		print(str(arr2[dist]))
+#	for dist in arr2.size():
+#		print(str(arr2[dist]))
 	testTimer.stop()
 	newGeneration()
 	testTimer.start()
