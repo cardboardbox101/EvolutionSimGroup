@@ -14,12 +14,13 @@ var x = 0
 
 func _ready():
 	var create
-	for c in 249:
+	for c in 100:
 		create = CREATURE.instance()
 		add_child(create)
 		arr.append(create)
 		create.init(rng.randi_range(3, 6), 250, 250, 50, 200, 150, 400, 1, 7, 1, 7, 1, 20, 0.1, 1, 0.1, 2, 0, 1, rng, true)
 		create.position = $Position2D.position
+	creature = arr[0]
 	timer.wait_time = 3
 	#timer.start()
 
@@ -75,7 +76,7 @@ func _on_Timer2_timeout():
 func sortCreatures():
 	for i in range(arr.size()-1, -1, -1):
 		for j in range(1,i+1,1):
-			if arr[j-1].distanceTravelled > arr[j].distanceTravelled:
+			if arr[j-1].distanceTravelled < arr[j].distanceTravelled:
 				var temp = arr[j-1]
 				arr[j-1] = arr[j]
 				arr[j] = temp
@@ -114,7 +115,7 @@ func killCreatures():
 		for n in range (arr.size() - 1, 0, -1):
 			if numKilled < numToKill:
 				arr[n].queue_free()
-				arr.remove(n)x
+				arr.remove(n)
 				numKilled += 1
 	print(arr.size())
 	for n in deletedNums.size():
@@ -130,10 +131,11 @@ func killCreatures():
 func newGeneration():
 	killCreatures()
 	breedCreatures()
+	creature = arr[0]
 
 func testCreatues():
 	#TO BE WRITTEN
-	testTimer.wait_time = 5
+	testTimer.wait_time = 15
 	testTimer.start()
 	pass
 
@@ -152,8 +154,8 @@ func _on_CreatureCountdown_timeout():
 			nulls +=1
 	print("Num of nulls = " + str(nulls))
 	for crts in arr.size():
-		arr[crts]._freezeJoints()
 		arr[crts].distanceTravelled = abs(arr[crts].nodeAvgPos.x - arr[crts].originalNodeAvgPos.x)
+		arr[crts]._freezeJoints()
 #		print("Creature " + str(crts) + " | Final Pos: " + str(arr[crts].nodeAvgPos) + " | ABS of Distance: " + str(arr[crts].distanceTravelled))
 	sortCreatures()
 	for crts2 in arr.size():
@@ -164,3 +166,11 @@ func _on_CreatureCountdown_timeout():
 	newGeneration()
 	testTimer.start()
 	pass # Replace with function body.
+
+func _findFurthest():
+	var highest = arr[0]
+	var crts = 1
+	while (crts<arr.size()):
+		if (arr[crts].distanceTravelled > highest.distanceTravelled):
+			highest = arr[crts]
+	return highest
