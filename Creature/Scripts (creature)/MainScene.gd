@@ -20,21 +20,8 @@ func _ready():
 		arr.append(create)
 		create.init(rng.randi_range(3, 6), 250, 250, 50, 200, 150, 400, 1, 7, 1, 7, 1, 20, 0.1, 1, 0.1, 2, 0, 1, rng, true)
 		create.position = $Position2D.position
+		create.get_og_pos()
 	creature = arr[0]
-	timer.wait_time = 3
-	#timer.start()
-
-	#IS THIS CODE NECCESARY?
-	#creature = CREATURE.instance()
-	#add_child(creature)
-	#creature.init(4, 250, 250, 50, 100, 150, 200, 1, 4, 1, 4, 1, 20, 0.1, 1, 0.1, 0.5, 0, 1, rng, true)
-	#creature.position = $Position2D.global_position
-	#var creature2 = CREATURE.instance()
-	#add_child(creature2)
-	#arr.append(creature2)
-	#creature2.init(3, 250, 250, 50, 100, 150, 200, 1, 4, 1, 4, 1, 20, 0.1, 1, 0.1, 0.5, 0, 1, rng, true)
-	#creature2._setGravity(0)
-	#creature2.position = $Position2D.global_position
 	testCreatues()
 
 func _on_Timer_timeout():
@@ -91,6 +78,7 @@ func breedCreatures():
 		newCreature.init(avg(creature1.nodeNumber, creature2.nodeNumber), 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, rng, false)
 		newCreature.averageNodeAndJoints(creature1, creature2)
 		arr.append(newCreature)
+		newCreature.get_og_pos()
 	#now the array is unsorted until creatures are tested again
 
 func killCreatures():

@@ -1,5 +1,7 @@
 extends RigidBody2D
 
+var originalPos = Vector2()
+
 func set_color():
 	$lr.visible = false
 	$mr.visible = false

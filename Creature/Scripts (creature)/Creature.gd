@@ -35,13 +35,13 @@ func averageNodeAndJoints(c1, c2):
 		largestC = c2
 	
 	for n in smallest:
-		get_node("circle_" + str(n)).global_position.x = (c1.get_node("circle_" + str(n)).global_position.x + c2.get_node("circle_" + str(n)).global_position.x) / 2
-		get_node("circle_" + str(n)).global_position.y = (c1.get_node("circle_" + str(n)).global_position.y + c2.get_node("circle_" + str(n)).global_position.y) / 2
+		get_node("circle_" + str(n)).position.x = (c1.get_node("circle_" + str(n)).originalPos.x + c2.get_node("circle_" + str(n)).originalPos.x) / 2
+		get_node("circle_" + str(n)).position.y = (c1.get_node("circle_" + str(n)).originalPos.y + c2.get_node("circle_" + str(n)).originalPos.y) / 2
 		get_node("circle_" + str(n)).friction =  (c1.get_node("circle_" + str(n)).friction + c2.get_node("circle_" + str(n)).friction) / 2
 		get_node("circle_" + str(n)).set_color()
 	
 	for i in range (smallest, nodeNumber):
-		get_node("circle_" + str(i)).global_position = largestC.get_node("circle_" + str(i)).global_position
+		get_node("circle_" + str(i)).position = largestC.get_node("circle_" + str(i)).originalPos
 		get_node("circle_" + str(i)).friction = largestC.get_node("circle_" + str(i)).friction
 		get_node("circle_" + str(i)).set_color()
 	
@@ -76,6 +76,10 @@ func averageNodeAndJoints(c1, c2):
 			j.damping = (0 + j2.damping) / 2
 			j.bias = (0 + j2.bias) / 2
 		j.set_color()
+
+func get_og_pos():
+	for n in nodes:
+		get_node(str(n)).originalPos = get_node(str(n)).global_position
 
 func _process(delta):
 	if (!originalCalculated):
