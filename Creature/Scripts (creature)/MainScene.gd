@@ -88,6 +88,7 @@ func breedCreatures():
 		add_child(newCreature)
 		newCreature.init(avg(creature1.nodeNumber, creature2.nodeNumber), 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,rng, false)
 		newCreature.averageNodeAndJoints(creature1, creature2)
+		arr.append(newCreature)
 	#now the array is unsorted until creatures are tested again
 
 func killCreatures():
@@ -98,11 +99,15 @@ func killCreatures():
 	var rand
 	var numKilled = 0
 	print(arr.size())
-	for n in arr.size():
+	var n = 0
+	while n < arr.size():
 		rand = rng.randi_range(0, arr.size())
 		if rand < n and numKilled < arr.size() / 2:
 			arr[n].queue_free()
+			arr.remove(n)
 			numKilled += 1
+		else:
+			n+=1
 	print(arr.size())
 	sortCreatures()
 
@@ -135,4 +140,5 @@ func _on_CreatureCountdown_timeout():
 		print(str(arr2[dist]))
 	testTimer.stop()
 	newGeneration()
+	testTimer.start()
 	pass # Replace with function body.
