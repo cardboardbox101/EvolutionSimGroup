@@ -100,8 +100,6 @@ func killCreatures():
 	var rand
 	var numKilled = 0
 	print(arr.size())
-	var n = 0
-	while n < arr.size():
 	var numToKill = arr.size() / 2
 	
 	for n in arr.size():
@@ -114,8 +112,6 @@ func killCreatures():
 			arr[n].queue_free()
 			arr.remove(n)
 			numKilled += 1
-		else:
-			n+=1
 	print(arr.size())
 	sortCreatures()
 
