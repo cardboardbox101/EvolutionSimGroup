@@ -14,9 +14,12 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if Input.is_action_pressed("left"):
+		global_position.x -= 100
+	if Input.is_action_pressed("right"):
+		global_position.x +=100
 	pass
 
 
 func _on_FurthestTimer_timeout():
-	position.x = get_parent().creature.position.x
 	pass # Replace with function body.
