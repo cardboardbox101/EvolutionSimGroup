@@ -14,7 +14,7 @@ var x = 0
 
 func _ready():
 	var create
-	for c in 100:
+	for c in 150:
 		create = CREATURE.instance()
 		add_child(create)
 		arr.append(create)
@@ -79,6 +79,13 @@ func breedCreatures():
 		newCreature.averageNodeAndJoints(creature1, creature2)
 		arr.append(newCreature)
 		newCreature.get_og_pos()
+	for n in 50:
+		var newCreature = CREATURE.instance()
+		add_child(newCreature)
+		newCreature.init(rng.randi_range(2, 8), rng.randi_range(100, 300), rng.randi_range(100, 300), rng.randi_range(10, 80), rng.randi_range(80, 170), rng.randi_range(50, 170), rng.randi_range(180, 300), rng.randi_range(.5, 2), rng.randi_range(2.5, 5), 0, 1, 0, 30, 0, 1, 0, 1, 0, 1, rng, false)
+	#init(node_number : int, maxX, maxY, minCLen, maxCLen, minELen, maxELen, minCTime, maxCTime, minETime, maxETime, minStiff, maxStiff, minDamp, maxDamp, minBias, maxBias, minFric, maxFric, rang, starting):
+		arr.append(newCreature)
+		newCreature.position = $Position2D.global_position
 	#now the array is unsorted until creatures are tested again
 
 func killCreatures():
@@ -89,7 +96,7 @@ func killCreatures():
 	var rand
 	var numKilled = 0
 	print(arr.size())
-	var numToKill = arr.size() / 2
+	var numToKill = (arr.size() / 2)
 	var deletedNums = []
 	
 	for n in arr.size():
@@ -123,7 +130,7 @@ func newGeneration():
 
 func testCreatues():
 	#TO BE WRITTEN
-	testTimer.wait_time = 15
+	testTimer.wait_time = 10
 	testTimer.start()
 	pass
 
