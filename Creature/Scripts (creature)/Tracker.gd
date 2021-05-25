@@ -13,6 +13,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	global_position.x = get_parent().creature.nodeAvgPos.x - 400
+	global_position.x = get_parent().arr[0].nodeAvgPos.x - 400
 	global_position.y = get_parent().get_child(4).global_position.y - 260
 	pass

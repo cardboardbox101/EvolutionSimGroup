@@ -24,16 +24,16 @@ func _ready():
 	#timer.start()
 
 	#IS THIS CODE NECCESARY?
-	creature = CREATURE.instance()
-	add_child(creature)
-	creature.init(4, 250, 250, 50, 100, 150, 200, 1, 4, 1, 4, 1, 20, 0.1, 1, 0.1, 0.5, 0, 1, rng, true)
-	creature.position = $Position2D.global_position
-	var creature2 = CREATURE.instance()
-	add_child(creature2)
-	arr.append(creature2)
-	creature2.init(3, 250, 250, 50, 100, 150, 200, 1, 4, 1, 4, 1, 20, 0.1, 1, 0.1, 0.5, 0, 1, rng, true)
-	creature2._setGravity(0)
-	creature2.position = $Position2D.global_position
+	#creature = CREATURE.instance()
+	#add_child(creature)
+	#creature.init(4, 250, 250, 50, 100, 150, 200, 1, 4, 1, 4, 1, 20, 0.1, 1, 0.1, 0.5, 0, 1, rng, true)
+	#creature.position = $Position2D.global_position
+	#var creature2 = CREATURE.instance()
+	#add_child(creature2)
+	#arr.append(creature2)
+	#creature2.init(3, 250, 250, 50, 100, 150, 200, 1, 4, 1, 4, 1, 20, 0.1, 1, 0.1, 0.5, 0, 1, rng, true)
+	#creature2._setGravity(0)
+	#creature2.position = $Position2D.global_position
 	testCreatues()
 
 func _on_Timer_timeout():
@@ -101,11 +101,13 @@ func killCreatures():
 	var numKilled = 0
 	print(arr.size())
 	var numToKill = arr.size() / 2
+	var deletedNums = []
 	
 	for n in arr.size():
 		rand = rng.randi_range(0, arr.size())
 		if rand < n and numKilled < numToKill:
 			arr[n].queue_free()
+			deletedNums.append(n)
 			numKilled += 1
 	if (numKilled < numToKill):
 		for n in range (arr.size() - 1, 0, -1):
@@ -113,6 +115,14 @@ func killCreatures():
 			arr.remove(n)
 			numKilled += 1
 	print(arr.size())
+	for n in deletedNums.size():
+		arr.remove(n)
+	print(arr.size())
+	var nulls = 0
+	for n in arr.size():
+		if (arr[n] == null):
+			nulls +=1
+	print("Num of nulls = " + str(nulls))
 	sortCreatures()
 
 func newGeneration():
@@ -121,7 +131,7 @@ func newGeneration():
 
 func testCreatues():
 	#TO BE WRITTEN
-	testTimer.wait_time = 2
+	testTimer.wait_time = 5
 	testTimer.start()
 	pass
 
@@ -133,6 +143,12 @@ func getCreaturePosition():
 	return creature.nodeAvgPos
 
 func _on_CreatureCountdown_timeout():
+	print("Array Size at the begining of timer "+ str(arr.size()))
+	var nulls = 0
+	for n in arr.size():
+		if (arr[n] == null):
+			nulls +=1
+	print("Num of nulls = " + str(nulls))
 	for crts in arr.size():
 		arr[crts]._freezeJoints()
 		arr[crts].distanceTravelled = abs(arr[crts].nodeAvgPos.x - arr[crts].originalNodeAvgPos.x)
