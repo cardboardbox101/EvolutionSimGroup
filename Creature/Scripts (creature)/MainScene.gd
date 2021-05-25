@@ -87,7 +87,7 @@ func breedCreatures():
 		
 		var newCreature = CREATURE.instance()
 		add_child(newCreature)
-		newCreature.init(avg(creature1.nodeNumber, creature2.nodeNumber), 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,rng, false)
+		newCreature.init(avg(creature1.nodeNumber, creature2.nodeNumber), 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, rng, false)
 		newCreature.averageNodeAndJoints(creature1, creature2)
 
 func killCreatures():

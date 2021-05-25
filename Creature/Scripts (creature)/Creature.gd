@@ -38,11 +38,13 @@ func averageNodeAndJoints(c1, c2):
 		get_node("circle_" + str(n)).global_position.x = (c1.get_node("circle_" + str(n)).global_position.x + c2.get_node("circle_" + str(n)).global_position.x) / 2
 		get_node("circle_" + str(n)).global_position.y = (c1.get_node("circle_" + str(n)).global_position.y + c2.get_node("circle_" + str(n)).global_position.y) / 2
 		get_node("circle_" + str(n)).friction =  (c1.get_node("circle_" + str(n)).friction + c2.get_node("circle_" + str(n)).friction) / 2
+		get_node("circle_" + str(n)).set_color()
 	
 	for i in range (smallest, nodeNumber):
 		get_node("circle_" + str(i)).global_position = largestC.get_node("circle_" + str(i)).global_position
 		get_node("circle_" + str(i)).friction = largestC.get_node("circle_" + str(i)).friction
-		
+		get_node("circle_" + str(i)).set_color()
+	
 	#reset joint positions and rotations
 	for n in jointNumber:
 		j = get_node("joint_" + str(n))
@@ -104,6 +106,7 @@ func init(node_number : int, maxX, maxY, minCLen, maxCLen, minELen, maxELen, min
 		circle.position = Vector2(rng.randf_range(position.x - maxX, position.x + maxX), rng.randf_range(position.y - maxY, position.y + maxY))
 		circle.friction = rng.randf_range(minFric, maxFric)
 		nodes.append(circle.name)
+		circle.set_color()
 
 	if (nodeNumber < 2):
 		jointNumber = 0
