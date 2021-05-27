@@ -11,7 +11,7 @@ onready var testTimer = $CreatureCountdown
 var creature
 var a = false
 var x = 0
-
+var gen = 1
 func _ready():
 	var create
 	for c in 100:
@@ -120,6 +120,7 @@ func newGeneration():
 	killCreatures()
 	breedCreatures()
 	creature = arr[0]
+	gen +=1
 
 func testCreatues():
 	#TO BE WRITTEN
@@ -152,6 +153,8 @@ func _on_CreatureCountdown_timeout():
 #		print(str(arr2[dist]))
 	testTimer.stop()
 	newGeneration()
+	$Camera/RichTextLabel.text = "Generation: " + str(gen)
+	$Camera/distDisplay.text = "Best Dist: " + str(_findFurthest())
 	testTimer.start()
 	pass # Replace with function body.
 
@@ -161,4 +164,5 @@ func _findFurthest():
 	while (crts<arr.size()):
 		if (arr[crts].distanceTravelled > highest.distanceTravelled):
 			highest = arr[crts]
-	return highest
+		crts+=1
+	return highest.distanceTravelled
