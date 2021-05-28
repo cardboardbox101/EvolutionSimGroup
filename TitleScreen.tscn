@@ -22,10 +22,10 @@ __meta__ = {
 }
 
 [node name="Button" type="Button" parent="."]
-margin_left = 883.0
-margin_top = 811.0
-margin_right = 1285.0
-margin_bottom = 939.0
+margin_left = 818.848
+margin_top = 794.094
+margin_right = 1220.85
+margin_bottom = 922.094
 custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
 icon = ExtResource( 2 )
 flat = true

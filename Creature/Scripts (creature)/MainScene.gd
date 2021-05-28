@@ -113,8 +113,14 @@ func killCreatures():
 				arr.remove(n)
 				numKilled += 1
 	print(arr.size())
-	for n in deletedNums.size():
-		arr.remove(n)
+#	for n in deletedNums.size():
+#		arr.remove(n)
+	var clen = 0
+	while (clen<arr.size()):
+		if (arr[clen] == null):
+			arr.remove(clen)
+		else:
+			clen+=1
 	print(arr.size())
 	var nulls = 0
 	for n in arr.size():
