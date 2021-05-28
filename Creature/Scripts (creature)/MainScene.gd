@@ -14,7 +14,7 @@ var x = 0
 var gen = 1
 func _ready():
 	var create
-	for c in 100:
+	for c in 250:
 		create = CREATURE.instance()
 		add_child(create)
 		arr.append(create)
@@ -79,6 +79,13 @@ func breedCreatures():
 		newCreature.averageNodeAndJoints(creature1, creature2)
 		arr.append(newCreature)
 		newCreature.get_og_pos()
+	for n in 50:
+		var newCreature = CREATURE.instance()
+		add_child(newCreature)
+		newCreature.init(rng.randi_range(3, 7), 150.00, 150.00, 50.00, 100.00, 150.00, 200.00, 1, 4, 1, 4, 1, 20, 0.1, 1, 0.1, 0.5, 0, 1,rng, true)
+		arr.append(newCreature)
+		newCreature.position = $Position2D.position
+		newCreature.get_og_pos()
 	#now the array is unsorted until creatures are tested again
 
 func killCreatures():
@@ -89,7 +96,7 @@ func killCreatures():
 	var rand
 	var numKilled = 0
 	print(arr.size())
-	var numToKill = arr.size() / 2
+	var numToKill = (arr.size() / 2) +25
 	var deletedNums = []
 	
 	for n in arr.size():
@@ -143,8 +150,10 @@ func _on_CreatureCountdown_timeout():
 			nulls +=1
 	print("Num of nulls = " + str(nulls))
 	for crts in arr.size():
-		arr[crts].distanceTravelled = abs(arr[crts].nodeAvgPos.x - arr[crts].originalNodeAvgPos.x)
-		arr[crts]._freezeJoints()
+		if(!arr[crts].travelCalculated):
+			arr[crts].distanceTravelled = abs(arr[crts].nodeAvgPos.x - arr[crts].originalNodeAvgPos.x)
+			arr[crts]._freezeJoints()
+			arr[crts].travelCalculated = true
 #		print("Creature " + str(crts) + " | Final Pos: " + str(arr[crts].nodeAvgPos) + " | ABS of Distance: " + str(arr[crts].distanceTravelled))
 	sortCreatures()
 	for crts2 in arr.size():

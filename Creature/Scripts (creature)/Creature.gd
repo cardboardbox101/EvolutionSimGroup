@@ -18,6 +18,7 @@ var distanceTravelled = 0
 var originalNodeAvgPos = Vector2()
 var nodeAvgPos = Vector2()
 var originalCalculated = false
+var travelCalculated = false
 
 #method used for breeding
 func averageNodeAndJoints(c1, c2):
